@@ -2,6 +2,7 @@ package com.springboot.graphql.diveintographqlinjava;
 
 import com.coxautodev.graphql.tools.SchemaParser;
 import com.springboot.graphql.diveintographqlinjava.resolver.Query;
+import com.springboot.graphql.diveintographqlinjava.resolver.TalkResolver;
 import com.springboot.graphql.diveintographqlinjava.service.AttendeeService;
 import com.springboot.graphql.diveintographqlinjava.service.SpeakerService;
 import com.springboot.graphql.diveintographqlinjava.service.TalkService;
@@ -39,7 +40,8 @@ public class DiveIntoGraphQLInJavaApplication {
                 .newParser()
                 .file("graphql/schema.graphqls")
 //				.dictionary()
-                .resolvers(new Query(speakerService, attendeeService, talkService))
+                .resolvers(new Query(speakerService, attendeeService, talkService),
+                        new TalkResolver(speakerService))
                 .build()
                 .makeExecutableSchema();
     }
